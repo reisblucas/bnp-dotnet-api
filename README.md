@@ -56,7 +56,7 @@ root
 |
 -----📂 [useCase name]  
 |
-------🗒️ C#...          // Repo implementation
+------🗒️ C#...          // useCase implementation
 |
 -📂 test                // Unit tests project
 
