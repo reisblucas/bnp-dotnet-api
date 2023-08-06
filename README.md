@@ -69,5 +69,6 @@ We give an example entity called **HERO** with CRUD implemented. You can use it 
 
 1. [Simple validation](src/Modules/hero/first_challenge.md)
 2. [Improving endpoint](src/Modules/hero/second_challenge.md)
-3. [TO-DO CRUD](src/Modules/todo/third_challenge.md)
-4. [Refactor challenge](src/Modules/refactor/fourth_challenge.md)
+3. [Hero relations](src/Modules/hero/third_challenge.md)
+4. [TO-DO CRUD](src/Modules/todo/fourth_challenge.md)
+5. [Refactor challenge](src/Modules/refactor/fifth_challenge.md)
