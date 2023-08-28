@@ -18,7 +18,7 @@ dotnet restore
 - Then, run it with 
 
 ```bash
-dotnet run --project ./src/backend-chalenge.csproj
+dotnet run --project ./src/backend-challenge.csproj
 ```
 
 - OK, now you can open [http://localhost:3000/swagger](http://localhost:3000/swagger) with your browser to see the result.
