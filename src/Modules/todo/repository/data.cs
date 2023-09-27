@@ -4,16 +4,21 @@ namespace backend_challenge.Modules.todo.repository;
 
 public class TodoData : ITodo
 {
-    private readonly AppDbContext _dbContext;
+    private readonly TodoDbContext _dbContext;
     
-    public TodoData(AppDbContext dbContext)
+    public TodoData(TodoDbContext dbContext)
     {
-        _context = dbContext;
+        _dbContext = dbContext;
     }
     
     public async Task<Todo> create(Todo entity)
     {
-        throw new NotImplementedException();
+        _dbContext.Todo.Add(entity);
+
+        var ret = await _dbContext.SaveChangesAsync();
+        
+        Console.WriteLine(ret);
+        return entity;
     }
 
     public async Task<Todo?> readOne(Guid id)
