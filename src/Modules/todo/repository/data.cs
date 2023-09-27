@@ -28,7 +28,8 @@ public class TodoData : ITodo
 
     public async Task<List<Todo>> readList()
     {
-        throw new NotImplementedException();
+        var query = _dbContext.Todo;
+        return await query.ToListAsync();
     }
 
     public async Task<Todo> update(Todo entity)
