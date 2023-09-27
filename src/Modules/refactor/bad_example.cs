@@ -7,17 +7,31 @@ public class Calculator
     private int z;
     private int result;
 
-    private void Multiply(bool greaterSign = false)
+    private bool xIsGreaterThanY;
+    private bool yIsGreaterThanZ;
+
+    public enum Available
     {
-        var firstCondition = greaterSign ? x > y : x < y;
-        var secondCondition = greaterSign ? y > z : y < z;
-        
-        if (firstCondition)
+        X = 'X',
+        Y = 'Y'
+    }
+
+    private void DefineGreater(Available str, bool greater)
+    {
+        if (str == Available.X)
+            xIsGreaterThanY = greater ? x > y : x < y;
+        if (str == Available.Y)
+            yIsGreaterThanZ = greater ? y > z : y < z;
+    }
+
+    private void Multiply()
+    {
+        if (xIsGreaterThanY)
         {
             x *= 2;
             result += x;
         }
-        else if (secondCondition)
+        else if (yIsGreaterThanZ)
         {
             y *= 3;
             result += y;
@@ -28,7 +42,7 @@ public class Calculator
             result += z;
         }
     }
-    
+
     public int Calc(int px, int py, int pz)
     {
         x = px;
@@ -38,25 +52,22 @@ public class Calculator
 
         for (int i = 0; i < 100; i++)
         {
+            DefineGreater(Available.X, true);
+            
             if (x > y)
-            {
                 x += 10;
-            }
             else if (y > z)
-            {
                 y -= 5;
-            }
             else
-            {
                 z += 15;
-            }
 
             switch (i)
             {
                 case 0:
-                    Multiply(true);
+                    Multiply();
                     break;
                 case 1:
+                    DefineGreater(Available.X, false);
                     Multiply();
                     break;
             }
