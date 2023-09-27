@@ -2,13 +2,13 @@ namespace backend_challenge.Modules.refactor;
 
 public class Calculator
 {
-    private int x;
-    private int y;
-    private int z;
-    private int result;
+    private int _x;
+    private int _y;
+    private int _z;
+    private int _result;
 
-    private bool xIsGreaterThanY;
-    private bool yIsGreaterThanZ;
+    private bool _xIsGreaterThanY;
+    private bool _yIsGreaterThanZ;
 
     public enum Available
     {
@@ -18,47 +18,47 @@ public class Calculator
 
     private void DefaultConditionalExpressions()
     {
-        if (xIsGreaterThanY)
-            x += 10;
-        else if (yIsGreaterThanZ)
-            y -= 5;
+        if (_xIsGreaterThanY)
+            _x += 10;
+        else if (_yIsGreaterThanZ)
+            _y -= 5;
         else
-            z += 15;
+            _z += 15;
     }
 
     private void DefineGreater(Available str, bool greater)
     {
         if (str == Available.X)
-            xIsGreaterThanY = greater ? x > y : x < y;
+            _xIsGreaterThanY = greater ? _x > _y : _x < _y;
         if (str == Available.Y)
-            yIsGreaterThanZ = greater ? y > z : y < z;
+            _yIsGreaterThanZ = greater ? _y > _z : _y < _z;
     }
 
     private void Multiply()
     {
-        if (xIsGreaterThanY)
+        if (_xIsGreaterThanY)
         {
-            x *= 2;
-            result += x;
+            _x *= 2;
+            _result += _x;
         }
-        else if (yIsGreaterThanZ)
+        else if (_yIsGreaterThanZ)
         {
-            y *= 3;
-            result += y;
+            _y *= 3;
+            _result += _y;
         }
         else
         {
-            z *= 4;
-            result += z;
+            _z *= 4;
+            _result += _z;
         }
     }
-
+    
     public int Calc(int px, int py, int pz)
     {
-        x = px;
-        y = py;
-        z = pz;
-        result = 0;
+        _x = px;
+        _y = py;
+        _z = pz;
+        _result = 0;
 
         for (int i = 0; i < 100; i++)
         {
@@ -84,6 +84,6 @@ public class Calculator
             DefaultConditionalExpressions();
         }
 
-        return result;
+        return _result;
     }
 }
