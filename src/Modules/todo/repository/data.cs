@@ -34,7 +34,9 @@ public class TodoData : ITodo
 
     public async Task<Todo> update(Todo entity)
     {
-        throw new NotImplementedException();
+        _dbContext.Todo.Update(entity);
+        _ = await _dbContext.SaveChangesAsync();
+        return entity;
     }
 
     public async Task<int> delete(Guid id)
