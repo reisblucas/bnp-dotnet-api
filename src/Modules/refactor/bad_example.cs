@@ -16,6 +16,16 @@ public class Calculator
         Y = 'Y'
     }
 
+    private void DefaultConditionalExpressions()
+    {
+        if (xIsGreaterThanY)
+            x += 10;
+        else if (yIsGreaterThanZ)
+            y -= 5;
+        else
+            z += 15;
+    }
+
     private void DefineGreater(Available str, bool greater)
     {
         if (str == Available.X)
@@ -53,13 +63,7 @@ public class Calculator
         for (int i = 0; i < 100; i++)
         {
             DefineGreater(Available.X, true);
-            
-            if (x > y)
-                x += 10;
-            else if (y > z)
-                y -= 5;
-            else
-                z += 15;
+            DefaultConditionalExpressions();
 
             switch (i)
             {
@@ -68,25 +72,16 @@ public class Calculator
                     break;
                 case 1:
                     DefineGreater(Available.X, false);
+                    DefineGreater(Available.Y, false);
                     Multiply();
                     break;
             }
         }
 
+        DefineGreater(Available.X, true);
         for (int j = 0; j < 50; j++)
         {
-            if (x > y)
-            {
-                x += 10;
-            }
-            else if (y > z)
-            {
-                y -= 5;
-            }
-            else
-            {
-                z += 15;
-            }
+            DefaultConditionalExpressions();
         }
 
         return result;
