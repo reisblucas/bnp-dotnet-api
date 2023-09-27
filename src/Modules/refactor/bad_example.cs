@@ -7,6 +7,28 @@ public class Calculator
     private int z;
     private int result;
 
+    private void Multiply(bool greaterSign = false)
+    {
+        var firstCondition = greaterSign ? x > y : x < y;
+        var secondCondition = greaterSign ? y > z : y < z;
+        
+        if (firstCondition)
+        {
+            x *= 2;
+            result += x;
+        }
+        else if (secondCondition)
+        {
+            y *= 3;
+            result += y;
+        }
+        else
+        {
+            z *= 4;
+            result += z;
+        }
+    }
+    
     public int Calc(int px, int py, int pz)
     {
         x = px;
@@ -32,38 +54,10 @@ public class Calculator
             switch (i)
             {
                 case 0:
-                    if (x > y)
-                    {
-                        x *= 2;
-                        result += x;
-                    }
-                    else if (y > z)
-                    {
-                        y *= 3;
-                        result += y;
-                    }
-                    else
-                    {
-                        z *= 4;
-                        result += z;
-                    }
+                    Multiply(true);
                     break;
                 case 1:
-                    if (x < y)
-                    {
-                        x *= 2;
-                        result += x;
-                    }
-                    else if (y < z)
-                    {
-                        y *= 3;
-                        result += y;
-                    }
-                    else
-                    {
-                        z *= 4;
-                        result += z;
-                    }
+                    Multiply();
                     break;
             }
         }
