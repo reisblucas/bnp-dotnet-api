@@ -11,5 +11,13 @@ public class Validator : Validator<Request>
         RuleFor(req => req.description)
             .NotEmpty()
             .WithMessage("Parameter \"description\" is required");
+
+        RuleFor(req => req.Superpowers)
+            .NotEmpty()
+            .WithMessage("Parameter \"superpowers\" is required");
+        
+        RuleFor(req => req.UniformColor)
+            .NotEmpty()
+            .WithMessage("Parameter \"uniformColor\" is required");
     }
 }

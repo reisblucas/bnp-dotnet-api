@@ -6,7 +6,7 @@ using FastEndpoints.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("Challenge"));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("challenge"));
 
 builder.Services.AddFastEndpoints();
 builder.Services.SwaggerDocument(o =>
