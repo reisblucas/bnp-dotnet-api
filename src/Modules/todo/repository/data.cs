@@ -41,6 +41,11 @@ public class TodoData : ITodo
 
     public async Task<int> delete(Guid id)
     {
-        throw new NotImplementedException();
+        var todo = await _dbContext.Todo.FindAsync(id);
+
+        if (todo is null) return 0;
+
+        _dbContext.Todo.Remove(todo);
+        return await _dbContext.SaveChangesAsync();
     }
 }
