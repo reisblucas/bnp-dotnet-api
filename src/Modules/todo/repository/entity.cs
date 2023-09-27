@@ -7,5 +7,5 @@ public class Todo
     public String description { get; set; } = null!;
     public TodoStatus todoStatus { get; set; } = TodoStatus.Pending;
     public DateTime createdAt { get; set; } = DateTime.Now;
-    public DateTime completedAt { get; set; }
+    public DateTime? completedAt { get; set; } = null;
 }
