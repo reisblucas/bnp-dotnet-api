@@ -1,20 +1,26 @@
 using backend_challenge.Modules.hero.repository;
-using backend_challenge.Modules.heroSuperPower.repository;
 using backend_challenge.Modules.superpower.repository;
-using backend_challenge.Modules.uniformColor.repository;
 
 namespace backend_challenge.Modules.hero.useCases.create;
 
 public class Mapper : Mapper<Request, Response, Hero>
 {
-    public override Hero ToEntity(Request req) => new()
+    public override Hero ToEntity(Request entity)
     {
-        name = req.name,
-        description = req.description,
-        image = req.image,
-        Superpowers = req.Superpowers.Select(sp => new Superpower { name = sp.name }).ToList(),
-        UniformColor = req.UniformColor
-    };
+        var hero = new Hero
+        {
+            name = entity.name,
+            description = entity.description,
+            image = entity.image
+        };
+
+        var superpowers = entity.Superpowers.Select(sp => new Superpower { name = sp.name }).ToList();
+        hero.Superpowers = superpowers;
+
+        hero.UniformColor = entity.UniformColor;
+
+        return hero;
+    }
 
     public override Response FromEntity(Hero entity) => new()
     {
@@ -24,4 +30,3 @@ public class Mapper : Mapper<Request, Response, Hero>
         image = entity.image
     };
 }
-

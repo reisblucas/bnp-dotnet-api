@@ -1,5 +1,4 @@
 using backend_challenge.Modules.hero.repository;
-using backend_challenge.Modules.heroSuperPower.repository;
 using backend_challenge.Modules.superpower.repository;
 using backend_challenge.Modules.uniformColor.repository;
 
@@ -7,12 +6,11 @@ namespace backend_challenge.context;
 
 public class AppDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+    public AppDbContext(DbContextOptions options) : base(options)
     {
     }
 
     public DbSet<Hero>? Heroes { get; set; }
-    public DbSet<HeroSuperpower>? HeroSuperpowers { get; set; }
     public DbSet<Superpower>? SuperPowers { get; set; }
     public DbSet<UniformColor>? UniformColors { get; set; }
 
@@ -26,28 +24,6 @@ public class AppDbContext : DbContext
         mb.Entity<Hero>()
             .Property(hero => hero.name)
             .IsRequired();
-
-        #endregion
-
-        #region Relations
-
-        mb.Entity<Hero>()
-            .HasOne(h => h.UniformColor)
-            .WithOne(u => u.Hero)
-            .HasForeignKey<UniformColor>(u => u.id);
-
-        mb.Entity<HeroSuperpower>()
-            .HasKey(hs => new { hs.HeroId, hs.SuperpowerId });
-
-        // mb.Entity<HeroSuperpower>()
-        //     .HasOne(hs => hs.Hero)
-        //     .WithMany(h => h.Superpowers)
-        //     .HasForeignKey(hs => hs.HeroId);
-
-        mb.Entity<HeroSuperpower>()
-            .HasOne(hs => hs.Superpower)
-            .WithMany(s => s.HeroSuperpowers)
-            .HasForeignKey(hs => hs.SuperpowerId);
 
         #endregion
 
@@ -88,5 +64,20 @@ public class AppDbContext : DbContext
             );
 
         #endregion
+
+        // #region Relations
+
+        mb.Entity<Hero>()
+            .HasMany(h => h.Superpowers)
+            .WithMany(sp => sp.Heroes)
+            .UsingEntity(j => j.ToTable("HeroSuperpowers"));
+
+        mb.Entity<Hero>()
+            .HasOne(u => u.UniformColor)
+            .WithOne(u => u.Hero)
+            .HasForeignKey<UniformColor>(u => u.id)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        // #endregion
     }
 }
