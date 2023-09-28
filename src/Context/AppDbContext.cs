@@ -56,5 +56,15 @@ public class AppDbContext : DbContext
                 new UniformColor { id = Guid.NewGuid(), name = "White" }
             );
         #endregion
+
+        mb.Entity<Hero>()
+            .HasOne<UniformColor>(h => h.UniformColor)
+            .WithMany(u => u.Heroes)
+            .HasForeignKey(h => h.id);
+        
+        mb.Entity<Hero>()
+            .HasMany<Superpower>(h => h.Superpowers)
+            .WithMany(h => h.Heroes)
+            .UsingEntity("HeroSuperpowers");
     }
 }
