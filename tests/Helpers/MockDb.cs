@@ -13,3 +13,15 @@ public class MockDb : IDbContextFactory<AppDbContext>
         return new AppDbContext(options);
     }
 }
+
+public class MockTodoDb : IDbContextFactory<TodoDbContext>
+{
+    public TodoDbContext CreateDbContext()
+    {
+        var options = new DbContextOptionsBuilder<TodoDbContext>()
+            .UseInMemoryDatabase($"InMemoryTestDb-{DateTime.Now.ToFileTimeUtc()}")
+            .Options;
+        return new TodoDbContext(options);
+    }
+}
+
