@@ -1,4 +1,5 @@
 using backend_challenge.context;
+using backend_challenge.Modules.superpower.repository;
 
 namespace backend_challenge.Modules.hero.repository;
 
@@ -13,6 +14,38 @@ public class HeroData : IHero
 
     public async Task<Hero> create(Hero entity)
     {
+        _context.Database.EnsureCreated();
+        var uniform = await _context.UniformColors.SingleOrDefaultAsync(u => u.name == entity.UniformColor.name);
+
+        if (uniform != null)
+        {
+            _context.Entry(uniform).State = EntityState.Detached;
+        }
+
+        var superpowerQuery = new List<Superpower>();
+        foreach (var super in entity.Superpowers)
+        {
+            var query = await _context.SuperPowers.FirstOrDefaultAsync(sp => sp.name == super.name);
+            
+            if (query != null)
+            {
+                // Console.WriteLine($"Superpower query: {query.id} {query.name}");
+                _context.Entry(query).State = EntityState.Detached;
+                superpowerQuery.Add(query);
+            }
+        
+        }
+        
+        if (uniform != null)
+        {
+            _context.Entry(uniform).State = EntityState.Detached;
+        }
+
+        entity.UniformColor.id = uniform.id;
+        entity.Superpowers = superpowerQuery.ToList();
+        
+        // Console.WriteLine($"Data > Uniform {uniform.id} {uniform.name}");
+
         _context.Heroes.Add(entity);
 
         var ret = await _context.SaveChangesAsync();

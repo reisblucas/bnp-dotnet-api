@@ -24,7 +24,8 @@ public class HeroReadOneEndPoint : Endpoint<Request, Response, Mapper>
             var useCase = new HeroCreateUseCase(_dbContext);
 
             var newHero = Map.ToEntity(req);
-
+            
+            Console.WriteLine($"Endpoint: {newHero.UniformColor.name}");
             var createdHero = await useCase.exec(newHero);
 
             var responseHero = Map.FromEntity(createdHero);
