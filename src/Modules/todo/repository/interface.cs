@@ -8,6 +8,7 @@ public interface ITodo {
     Task<List<Todo>> readList();
     Task<Todo> update(Todo entity);
     Task<int> delete(Guid id);
+    Task<Todo> completeTask(Todo entity);
 }
 
 public enum TodoStatus

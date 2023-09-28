@@ -1,4 +1,5 @@
 using backend_challenge.context;
+using Namotion.Reflection;
 
 namespace backend_challenge.Modules.todo.repository;
 
@@ -47,5 +48,27 @@ public class TodoData : ITodo
 
         _dbContext.Todo.Remove(todo);
         return await _dbContext.SaveChangesAsync();
+    }
+    
+    public async Task<Todo> completeTask(Todo entity)
+    {
+        _dbContext.Database.EnsureCreated();
+        var prevTodoTask = await _dbContext.Todo.SingleOrDefaultAsync(td => td.id == entity.id);
+        
+        // check if local is not null 
+        if (prevTodoTask != null)
+        {
+            // detach -> this saves my day and I can complete the another challeng
+            _dbContext.Entry(prevTodoTask).State = EntityState.Detached;
+        }
+        
+        entity.name = prevTodoTask.name;
+        entity.description = prevTodoTask.description;
+        entity.createdAt = prevTodoTask.createdAt;
+        entity.todoStatus = TodoStatus.Completed.ToString();
+        
+        _dbContext.Todo.Update(entity);
+        _ = await _dbContext.SaveChangesAsync();
+        return entity;
     }
 }

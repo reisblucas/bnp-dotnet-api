@@ -14,7 +14,7 @@ public class TodoCompleteTaskUseCase
 
     public async Task<Todo> exec(Todo entity)
     {
-        var todoUpdated = await _todoData.update(entity);
+        var todoUpdated = await _todoData.completeTask(entity);
 
         return todoUpdated;
     }

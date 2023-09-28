@@ -25,7 +25,7 @@ public class TodoCompleteTaskEndpoint : Endpoint<Request, Response, Mapper>
         {
             var updateData = Map.ToEntity(req);
 
-            var useCase = new TodoUpdateUseCase(_DbContext);
+            var useCase = new TodoCompleteTaskUseCase(_DbContext);
 
             Todo updatedTodo;
             try

@@ -6,6 +6,6 @@ public class Todo
     public String name { get; set; } = null!;
     public String description { get; set; } = null!;
     public string todoStatus { get; set; } = TodoStatus.Pending.ToString();
-    public DateTime createdAt { get; set; } = DateTime.Now;
+    public DateTime createdAt { get; set; }
     public DateTime? completedAt { get; set; } = null;
 }

@@ -7,7 +7,8 @@ public class Mapper : Mapper<Request, Response, Todo>
     public override Todo ToEntity(Request req) => new()
     {
         name = req.name,
-        description = req.description
+        description = req.description,
+        createdAt = DateTime.Now
     };
 
     public override Response FromEntity(Todo entity) => new()

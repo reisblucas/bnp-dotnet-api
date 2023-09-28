@@ -10,13 +10,5 @@ public class TodoDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder mb)
     {
-        // #region Hero
-        // mb.Entity<Hero>()
-        //     .HasKey(hero => hero.id);
-        //
-        // mb.Entity<Hero>()
-        //     .Property(hero => hero.name)
-        //     .IsRequired();
-        // #endregion
     }
 }
