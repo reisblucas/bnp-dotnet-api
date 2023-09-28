@@ -64,4 +64,20 @@ public class TodoCreateUseCaseTests
         var exception = await Assert.ThrowsAsync<Microsoft.EntityFrameworkCore.DbUpdateException>(() => usecase.exec(testTodo));
         Assert.Contains("Required properties '{'description'}' are missing for the instance of entity type 'Todo'", exception.Message);
     }
+    
+    [Fact]
+    [Description("Test task without description")]
+    public async Task TodoWithouNameAndDescription()
+    {
+        var testTodo = new Todo()
+        {
+            id = Guid.NewGuid(),
+        };
+
+        await using var _dbContext = new MockTodoDb().CreateDbContext();
+        var usecase = new TodoCreateUseCase(_dbContext);
+
+        var exception = await Assert.ThrowsAsync<Microsoft.EntityFrameworkCore.DbUpdateException>(() => usecase.exec(testTodo));
+        Assert.Contains("Required properties '{'description', 'name'}' are missing for the instance of entity type 'Todo'", exception.Message);
+    }
 }
