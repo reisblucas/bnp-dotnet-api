@@ -11,7 +11,7 @@ public class AppDbContext : DbContext
     public DbSet<Hero>? Heroes { get; set; }
     public DbSet<Superpower>? SuperPowers { get; set; }
     public DbSet<UniformColor>? UniformColors { get; set; }
-
+    
     protected override void OnModelCreating(ModelBuilder mb)
     {
         #region Hero
